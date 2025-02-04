@@ -46,11 +46,11 @@ cd moda-selfie
 
 
  2. Backend Kurulumu
-cd backend
-cp .env.example .env   .env dosyasını düzenleyin
-npm install
-npm run seed   Örnek verileri yükle
-npm run dev
+-cd backend
+-cp .env.example .env   .env dosyasını düzenleyin
+-npm install
+-npm run seed   Örnek verileri yükle
+-npm run dev
 
  3. Frontend Kurulumu
 
