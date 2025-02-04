@@ -41,6 +41,7 @@ Moda Selfie, AVM'lerde ve popüler noktalarda yer alacak interaktif aynalardan, 
  1. Projeyi Klonlama
 
 git clone https://github.com/halilberkayy/moda-selfie.git
+
 cd moda-selfie
 
 
