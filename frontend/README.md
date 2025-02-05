@@ -1,70 +1,122 @@
-# Getting Started with Create React App
+# Moda Selfie Aynası - Frontend 🖥️
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Bu repo, Moda Selfie Aynası projesinin frontend kısmını içerir. Modern ve kullanıcı dostu bir arayüz ile kullanıcıların fotoğraf çekip stil önerileri almasını sağlar.
 
-## Available Scripts
+## 🌟 Özellikler
 
-In the project directory, you can run:
+- **📸 Gelişmiş Kamera Entegrasyonu**
+  - Otomatik kamera algılama
+  - Hata yönetimi ve kullanıcı bildirimleri
+  - Yükleme durumu göstergeleri
+  
+- **🎨 Modern UI/UX**
+  - Responsive tasarım
+  - Kullanıcı dostu arayüz
+  - Yükleme ve hata durumu göstergeleri
+  
+- **🔄 Güçlü API Entegrasyonu**
+  - Otomatik yeniden deneme mekanizması
+  - Hata yönetimi
+  - Timeout kontrolü
 
-### `npm start`
+## 🛠️ Teknolojiler
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- React 18
+- Axios
+- React Webcam
+- Modern CSS3
+- Jest & Testing Library
+- ESLint & Prettier
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🚀 Kurulum
 
-### `npm test`
+1. Gerekli paketleri yükleyin:
+```bash
+npm install
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. Çevre değişkenlerini ayarlayın:
+```bash
+cp .env.example .env
+echo "REACT_APP_API_URL=http://localhost:3001" >> .env
+```
 
-### `npm run build`
+3. Geliştirme modunda çalıştırın:
+```bash
+npm start
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 📦 Docker ile Çalıştırma
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+docker-compose up --build
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 🧪 Testler
 
-### `npm run eject`
+### Tüm Testleri Çalıştırma
+```bash
+npm test
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Test Coverage Raporu
+```bash
+npm test -- --coverage
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🔧 Kullanılabilir Scriptler
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **npm start**: Geliştirme modunda çalıştırır
+- **npm test**: Test suite'i çalıştırır
+- **npm run build**: Üretim için build alır
+- **npm run lint**: Kod kalitesi kontrolü
+- **npm run lint:fix**: Otomatik düzeltilebilir lint hatalarını düzeltir
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 📁 Proje Yapısı
 
-## Learn More
+```
+src/
+├── components/        # UI bileşenleri
+├── services/         # API servisleri
+├── hooks/            # Custom React hooks
+├── utils/            # Yardımcı fonksiyonlar
+├── styles/           # CSS dosyaları
+└── tests/            # Test dosyaları
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🔍 Önemli Bileşenler
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### CameraCapture
+- Kamera erişimi ve fotoğraf çekimi
+- Hata yönetimi
+- Yükleme durumu göstergeleri
 
-### Code Splitting
+### API Servisleri
+- Retry mekanizması
+- Timeout kontrolü
+- Hata yönetimi
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 🛡️ Hata Yönetimi
 
-### Analyzing the Bundle Size
+- Kamera erişim hataları
+- API iletişim hataları
+- Ağ bağlantı sorunları
+- Yükleme hataları
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 🤝 Katkıda Bulunma
 
-### Making a Progressive Web App
+1. Fork yapın
+2. Feature branch oluşturun (`git checkout -b feature/amazing-feature`)
+3. Değişikliklerinizi commit edin (`git commit -m 'feat: Add amazing feature'`)
+4. Branch'inizi push edin (`git push origin feature/amazing-feature`)
+5. Pull Request oluşturun
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 📝 Notlar
 
-### Advanced Configuration
+- Geliştirme için Node.js 18+ gereklidir
+- API_URL environment değişkeni zorunludur
+- Kamera erişimi için HTTPS veya localhost gereklidir
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 📄 Lisans
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Bu proje MIT lisansı altında lisanslanmıştır.

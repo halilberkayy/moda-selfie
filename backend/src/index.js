@@ -2,9 +2,9 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const { errorHandler } = require('./utils/errorHandler');
 const apiRoutes = require('./routes/api');
 const config = require('./config/config');
-const { handleError } = require('./utils/errorHandler');
 
 const app = express();
 
@@ -13,7 +13,7 @@ app.use(cors());
 app.use(express.json({ limit: '10mb' })); // fotoğraf gibi büyük payloadlar için
 
 // API Routes
-app.use('/api', apiRoutes);
+app.use('/', apiRoutes);
 
 // 404 handler
 app.all('*', (req, res) => {
@@ -23,8 +23,8 @@ app.all('*', (req, res) => {
   });
 });
 
-// Hata yönetimi
-app.use(handleError);
+// Global error handler
+app.use(errorHandler);
 
 // MongoDB bağlantısı
 mongoose
@@ -41,3 +41,5 @@ mongoose
     console.error('MongoDB bağlantı hatası:', err);
     process.exit(1);
   });
+
+module.exports = app;

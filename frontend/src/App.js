@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import WeatherInfo from './components/WeatherInfo';
 import CameraCapture from './components/CameraCapture';
 import ProductRecommendations from './components/ProductRecommendations';
-import api from './services/api';
+import * as api from './services/api';
 import './App.css';
 
 function App() {
@@ -14,13 +14,12 @@ function App() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Hava durumu bilgisini backend'den çek
     const fetchWeather = async () => {
       try {
         setLoading(true);
         setError(null);
-        const res = await api.get('/weather');
-        setWeather(res.data);
+        const weatherData = await api.getWeather();
+        setWeather(weatherData);
       } catch (err) {
         console.error(err);
         setError('Hava durumu bilgisi alınamadı');
@@ -31,20 +30,17 @@ function App() {
     fetchWeather();
   }, []);
 
-  // Kamera ile fotoğraf çekildiğinde çağrılacak fonksiyon
   const handleCapture = async (photoData) => {
     try {
       setLoading(true);
       setError(null);
-      const res = await api.post('/analyze', { photo: photoData });
-      setAnalysis(res.data.analysis);
-      // Önerilen tag üzerinden ürünleri çekelim
-      const tag = res.data.analysis.recommendedTag;
-      const prodRes = await api.get(`/products?tag=${tag}`);
-      setProducts(prodRes.data);
+      const analysisData = await api.uploadPhoto(photoData);
+      setAnalysis(analysisData);
+      const recommendationsData = await api.getRecommendations(analysisData.tags);
+      setProducts(recommendationsData.recommendations);
     } catch (err) {
       console.error(err);
-      setError('Fotoğraf analizi veya ürün önerileri alınamadı');
+      setError('Fotoğraf analizi başarısız oldu');
     } finally {
       setLoading(false);
     }

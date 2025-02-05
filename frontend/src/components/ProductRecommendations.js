@@ -1,27 +1,21 @@
 import React from 'react';
 
-function ProductRecommendations({ products }) {
+const ProductRecommendations = ({ products }) => {
+  if (!products || products.length === 0) return null;
+
   return (
     <div className="product-recommendations">
-      <h2>Önerilen Ürünler</h2>
+      <h2>Size Özel Öneriler</h2>
       <div className="products-grid">
         {products.map((product) => (
-          <div key={product._id} className="product-card">
-            <img src={product.imageUrl} alt={product.name} className="product-image" />
+          <div key={product.id} className="product-card">
+            <img src={product.imageUrl} alt={product.name} />
             <h3>{product.name}</h3>
-            <a 
-              href={product.qrCodeUrl} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="product-link"
-            >
-              Ürünü Görüntüle (QR)
-            </a>
           </div>
         ))}
       </div>
     </div>
   );
-}
+};
 
 export default ProductRecommendations; 

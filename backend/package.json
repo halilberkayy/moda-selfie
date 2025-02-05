@@ -11,6 +11,20 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
+  "jest": {
+    "testEnvironment": "node",
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ],
+    "rootDir": ".",
+    "testMatch": [
+      "<rootDir>/test/**/*.test.js"
+    ],
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/src/$1"
+    }
+  },
   "keywords": [
     "moda",
     "selfie",
@@ -25,7 +39,8 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "mongoose": "^7.0.3"
+    "mongoose": "^7.0.3",
+    "winston": "^3.17.0"
   },
   "devDependencies": {
     "eslint": "^8.38.0",
