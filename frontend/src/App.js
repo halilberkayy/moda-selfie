@@ -1,84 +1,92 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import WeatherInfo from './components/WeatherInfo';
 import CameraCapture from './components/CameraCapture';
 import ProductRecommendations from './components/ProductRecommendations';
-import * as api from './services/api';
+import LoadingSpinner from './components/LoadingSpinner';
 import './App.css';
 
 function App() {
-  const [weather, setWeather] = useState(null);
-  const [analysis, setAnalysis] = useState(null);
-  const [products, setProducts] = useState([]);
-  const [showCamera, setShowCamera] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [capturedImage, setCapturedImage] = useState(null);
+  const [recommendations, setRecommendations] = useState([]);
+  const [weatherData, setWeatherData] = useState(null);
 
   useEffect(() => {
-    const fetchWeather = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        const weatherData = await api.getWeather();
-        setWeather(weatherData);
-      } catch (err) {
-        console.error(err);
-        setError('Hava durumu bilgisi alınamadı');
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchWeather();
+    document.title = 'Moda Selfie Aynası';
   }, []);
 
-  const handleCapture = async (photoData) => {
+  const handleImageCapture = async (image) => {
+    setCapturedImage(image);
+    setLoading(true);
     try {
-      setLoading(true);
-      setError(null);
-      const analysisData = await api.uploadPhoto(photoData);
-      setAnalysis(analysisData);
-      const recommendationsData = await api.getRecommendations(analysisData.tags);
-      setProducts(recommendationsData.recommendations);
-    } catch (err) {
-      console.error(err);
-      setError('Fotoğraf analizi başarısız oldu');
+      const formData = new FormData();
+      formData.append('image', image);
+
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/analyze`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      if (response.data.recommendations) {
+        setRecommendations(response.data.recommendations);
+        toast.success('Fotoğrafınız başarıyla analiz edildi!');
+      } else {
+        toast.warning('Üzgünüz, fotoğrafınıza uygun ürün bulunamadı.');
+      }
+    } catch (error) {
+      console.error('Fotoğraf analizi sırasında hata:', error);
+      toast.error('Fotoğraf analizi sırasında bir hata oluştu. Lütfen tekrar deneyin.');
+      setRecommendations([]);
     } finally {
       setLoading(false);
     }
   };
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Moda Selfie Ayna</h1>
-        
-        {error && (
-          <div className="error-message">
-            {error}
-          </div>
-        )}
+  const resetApp = () => {
+    setCapturedImage(null);
+    setRecommendations([]);
+  };
 
+  return (
+    <div className="app-container">
+      <ToastContainer position="top-right" autoClose={5000} />
+      <header className="app-header">
+        <h1>Moda Selfie Aynası</h1>
+        <WeatherInfo weatherData={weatherData} setWeatherData={setWeatherData} />
+      </header>
+
+      <main className="app-main">
         {loading ? (
-          <div className="loading-spinner">
-            Yükleniyor...
-          </div>
+          <LoadingSpinner message="Fotoğrafınız analiz ediliyor..." />
         ) : (
           <>
-            {weather && <WeatherInfo weather={weather} />}
-            {!showCamera && (
-              <button 
-                className="start-button"
-                onClick={() => setShowCamera(true)}
-              >
-                Başla
-              </button>
-            )}
-            {showCamera && <CameraCapture onCapture={handleCapture} />}
-            {products.length > 0 && (
-              <ProductRecommendations products={products} />
+            {!capturedImage ? (
+              <CameraCapture onCapture={handleImageCapture} />
+            ) : (
+              <div className="results-container">
+                <div className="captured-image-container">
+                  <img src={capturedImage} alt="Çekilen fotoğraf" className="captured-image" />
+                  <button onClick={resetApp} className="reset-button">
+                    Yeni Fotoğraf Çek
+                  </button>
+                </div>
+                <ProductRecommendations 
+                  recommendations={recommendations}
+                  weatherData={weatherData}
+                />
+              </div>
             )}
           </>
         )}
-      </header>
+      </main>
+
+      <footer className="app-footer">
+        <p>© 2024 Moda Selfie Aynası - Tüm hakları saklıdır.</p>
+      </footer>
     </div>
   );
 }

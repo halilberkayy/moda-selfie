@@ -1,79 +1,163 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import Webcam from 'react-webcam';
+import { toast } from 'react-toastify';
 import './CameraCapture.css';
 
 const CameraCapture = ({ onCapture }) => {
-  const [error, setError] = useState(null);
   const webcamRef = useRef(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isPermissionGranted, setIsPermissionGranted] = useState(false);
+  const [isCameraReady, setIsCameraReady] = useState(false);
+  const [countdown, setCountdown] = useState(null);
+  const [cameraError, setCameraError] = useState(null);
 
-  const videoConstraints = {
-    width: 1280,
-    height: 720,
-    facingMode: "user"
-  };
+  useEffect(() => {
+    // Kamera izni kontrolü
+    const checkCameraPermission = async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        setIsPermissionGranted(true);
+        // Stream'i kapatıyoruz çünkü Webcam komponenti kendi stream'ini oluşturacak
+        stream.getTracks().forEach(track => track.stop());
+      } catch (err) {
+        console.error('Kamera erişim hatası:', err);
+        setCameraError(err.message);
+        setIsPermissionGranted(false);
+      }
+    };
 
-  const handleCapture = useCallback(() => {
-    if (webcamRef.current) {
+    checkCameraPermission();
+  }, []);
+
+  const handleUserMedia = useCallback(() => {
+    setIsPermissionGranted(true);
+    setIsCameraReady(true);
+    setCameraError(null);
+  }, []);
+
+  const handleUserMediaError = useCallback((err) => {
+    console.error('Kamera erişim hatası:', err);
+    setIsPermissionGranted(false);
+    setCameraError(err.message);
+    toast.error('Kamera erişimi reddedildi. Lütfen kamera izinlerini kontrol edin.');
+  }, []);
+
+  const capture = useCallback(() => {
+    if (!webcamRef.current) return;
+
+    try {
       const imageSrc = webcamRef.current.getScreenshot();
       if (imageSrc) {
         onCapture(imageSrc);
       } else {
-        setError('Fotoğraf çekilemedi. Lütfen tekrar deneyin.');
+        toast.error('Fotoğraf çekilemedi. Lütfen tekrar deneyin.');
       }
+    } catch (error) {
+      console.error('Fotoğraf çekme hatası:', error);
+      toast.error('Fotoğraf çekilirken bir hata oluştu.');
     }
   }, [onCapture]);
 
-  const handleUserMediaError = useCallback((err) => {
-    console.error('Kamera erişim hatası:', err);
-    setError(
-      'Kamera erişimi sağlanamadı. Lütfen kamera izinlerinizi kontrol edin ve tarayıcınızın kamera erişimine izin verdiğinizden emin olun.'
-    );
-  }, []);
+  const startCountdown = useCallback(() => {
+    setCountdown(3);
+    const timer = setInterval(() => {
+      setCountdown(prev => {
+        if (prev <= 1) {
+          clearInterval(timer);
+          return null;
+        }
+        return prev - 1;
+      });
+    }, 1000);
 
-  const handleRetry = useCallback(() => {
-    setError(null);
-    setIsLoading(true);
-  }, []);
+    setTimeout(() => {
+      capture();
+    }, 3000);
+  }, [capture]);
 
-  const handleUserMedia = useCallback(() => {
-    setIsLoading(false);
-    setError(null);
-  }, []);
+  const handleRetry = () => {
+    // Sayfayı yenilemek yerine sadece kamera izinlerini tekrar kontrol ediyoruz
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(stream => {
+        stream.getTracks().forEach(track => track.stop());
+        setIsPermissionGranted(true);
+        setCameraError(null);
+        setIsCameraReady(false);
+      })
+      .catch(err => {
+        console.error('Kamera erişim hatası:', err);
+        setCameraError(err.message);
+        setIsPermissionGranted(false);
+        toast.error('Kamera erişimi sağlanamadı. Lütfen tarayıcı ayarlarınızdan kamera izinlerini kontrol edin.');
+      });
+  };
 
-  if (error) {
+  if (!isPermissionGranted || cameraError) {
     return (
-      <div className="camera-error">
-        <p>{error}</p>
-        <button className="retry-button" onClick={handleRetry}>
-          Tekrar Dene
-        </button>
+      <div className="camera-permission">
+        <div className="camera-permission-content">
+          <h2>Kamera İzni Gerekli</h2>
+          <p>Bu özelliği kullanmak için kamera izni vermeniz gerekmektedir.</p>
+          {cameraError && (
+            <p className="error-message">
+              Hata: {cameraError}
+            </p>
+          )}
+          <button 
+            onClick={handleRetry}
+            className="retry-button"
+          >
+            Tekrar Dene
+          </button>
+          <p className="help-text">
+            Not: Tarayıcınızın adres çubuğundaki kamera izinlerini kontrol edin.
+          </p>
+        </div>
       </div>
     );
   }
 
   return (
     <div className="camera-container">
-      {isLoading && <div className="loading">Kamera başlatılıyor...</div>}
-      <Webcam
-        audio={false}
-        ref={webcamRef}
-        screenshotFormat="image/jpeg"
-        videoConstraints={videoConstraints}
-        onUserMediaError={handleUserMediaError}
-        onUserMedia={handleUserMedia}
-        className="webcam"
-        data-testid="mock-webcam"
-      />
-      <button 
-        className="capture-button"
-        onClick={handleCapture}
-        disabled={isLoading || error}
-      >
-        Fotoğraf Çek
-      </button>
+      <div className="camera-frame">
+        <Webcam
+          ref={webcamRef}
+          audio={false}
+          screenshotFormat="image/jpeg"
+          videoConstraints={{
+            width: 1280,
+            height: 720,
+            facingMode: "user",
+            aspectRatio: 16/9
+          }}
+          onUserMedia={handleUserMedia}
+          onUserMediaError={handleUserMediaError}
+          mirrored
+        />
+        {countdown && (
+          <div className="countdown-overlay">
+            <div className="countdown">{countdown}</div>
+          </div>
+        )}
+      </div>
+      
+      {isCameraReady && !countdown && (
+        <div className="camera-controls">
+          <button 
+            onClick={startCountdown}
+            className="capture-button"
+            aria-label="Fotoğraf Çek"
+          >
+            <span className="capture-button-inner" />
+          </button>
+        </div>
+      )}
     </div>
   );
 };
 
-export default CameraCapture; 
+CameraCapture.propTypes = {
+  onCapture: PropTypes.func.isRequired,
+};
+
+export default CameraCapture;
