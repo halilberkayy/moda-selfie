@@ -4,7 +4,8 @@ import { toast } from 'react-toastify';
 import './ProductRecommendations.css';
 
 const ProductRecommendations = ({ recommendations, weatherData }) => {
-  const handleProductClick = (productUrl) => {
+  // eslint-disable-next-line no-unused-vars
+  const handleProductClick = (url) => {
     // QR kod oluşturma ve gösterme işlemi burada yapılacak
     toast.info('QR kod oluşturuluyor...');
   };

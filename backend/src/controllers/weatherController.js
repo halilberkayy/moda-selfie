@@ -1,40 +1,71 @@
-const weatherService = require('../services/weatherService');
-const { AppError } = require('../utils/errorHandler');
-const logger = require('../utils/logger');
+const axios = require('axios');
+const AppError = require('../middleware/errorHandler');
+const logger = require('../config/logger');
 
-exports.getWeather = async (req, res, next) => {
+// OpenWeatherMap API'den hava durumu verisi al
+const getWeatherData = async (req, res, next) => {
   try {
-    logger.info('Hava durumu bilgisi istendi');
-    
-    const weatherData = await weatherService.getWeather();
-    
-    if (!weatherData) {
-      logger.error('Hava durumu verisi alınamadı');
-      throw new AppError('Hava durumu verisi bulunamadı', 404);
+    // Varsayılan olarak İstanbul koordinatları
+    const lat = req.query.lat || 41.0082;
+    const lon = req.query.lon || 28.9784;
+
+    const response = await axios.get(
+      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.OPENWEATHER_API_KEY}&units=metric&lang=tr`
+    );
+
+    const weatherData = {
+      temperature: Math.round(response.data.main.temp),
+      feelsLike: Math.round(response.data.main.feels_like),
+      humidity: response.data.main.humidity,
+      windSpeed: response.data.wind.speed,
+      description: response.data.weather[0].description,
+      icon: response.data.weather[0].icon,
+      location: response.data.name
+    };
+
+    // Hava durumuna göre etiketler oluştur
+    const tags = [];
+
+    // Sıcaklığa göre etiketler
+    if (weatherData.temperature < 10) {
+      tags.push('soğuk', 'kış');
+    } else if (weatherData.temperature < 20) {
+      tags.push('ılıman', 'bahar');
+    } else if (weatherData.temperature < 30) {
+      tags.push('sıcak', 'yaz');
+    } else {
+      tags.push('çok-sıcak', 'yaz');
     }
 
-    logger.info('Hava durumu bilgisi başarıyla alındı', { data: weatherData });
+    // Hava durumuna göre etiketler
+    if (response.data.weather[0].main === 'Rain') {
+      tags.push('yağmurlu');
+    } else if (response.data.weather[0].main === 'Snow') {
+      tags.push('karlı');
+    } else if (response.data.weather[0].main === 'Clear') {
+      tags.push('güneşli');
+    } else if (response.data.weather[0].main === 'Clouds') {
+      tags.push('bulutlu');
+    }
+
+    weatherData.tags = tags;
+
+    logger.info('Hava durumu verileri başarıyla alındı', {
+      location: weatherData.location,
+      temperature: weatherData.temperature,
+      tags: weatherData.tags
+    });
 
     res.status(200).json({
       status: 'success',
-      data: weatherData,
-      timestamp: new Date().toISOString()
+      data: weatherData
     });
   } catch (error) {
-    logger.error('Hava durumu servisi hatası', { 
-      error: error.message,
-      stack: error.stack 
-    });
-
-    const statusCode = error instanceof AppError ? error.statusCode : 503;
-    const errorMessage = error instanceof AppError 
-      ? error.message 
-      : 'Hava durumu bilgisi alınamadı. Lütfen daha sonra tekrar deneyin.';
-
-    res.status(statusCode).json({
-      status: 'error',
-      message: errorMessage,
-      timestamp: new Date().toISOString()
-    });
+    logger.error('Hava durumu verileri alınırken hata oluştu:', error);
+    return next(new AppError('Hava durumu verileri alınamadı', 500));
   }
+};
+
+module.exports = {
+  getWeatherData
 }; 

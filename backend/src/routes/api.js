@@ -1,34 +1,124 @@
 const express = require('express');
+const multer = require('multer');
+const { getWeatherData } = require('../controllers/weatherController');
+const { analyzeAndRecommend, getProductsByTag } = require('../controllers/recommendationController');
+const AppError = require('../middleware/errorHandler');
+
 const router = express.Router();
-const { AppError } = require('../utils/errorHandler');
 
-const weatherController = require('../controllers/weatherController');
-const recommendationController = require('../controllers/recommendationController');
-
-// Hava durumu bilgisini döndüren endpoint
-router.get('/weather', weatherController.getWeather);
-
-// Fotoğraf analiz endpoint (simülasyon)
-router.post('/analyze', async (req, res, next) => {
-  try {
-    const { photo } = req.body;
-    
-    if (!photo) {
-      throw new AppError('Fotoğraf verisi gereklidir', 400);
-    }
-
-    console.log('Fotoğraf analizi başlatılıyor...');
-    const analysisResult = await require('../utils/aiAnalyzer').analyzePhoto(photo);
-    console.log('Analiz sonucu:', analysisResult);
-    
-    res.json({ analysis: analysisResult });
-  } catch (error) {
-    console.error('Fotoğraf analizi hatası:', error);
-    next(error);
+// Multer yapılandırması
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, 'uploads/');
+  },
+  filename: function(req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    cb(null, file.fieldname + '-' + uniqueSuffix + '.' + file.originalname.split('.').pop());
   }
 });
 
-// Ürün önerileri endpoint
-router.get('/products', recommendationController.getProductsByTag);
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith('image/')) {
+    cb(null, true);
+  } else {
+    cb(new AppError('Lütfen sadece resim dosyası yükleyin.', 400), false);
+  }
+};
+
+const upload = multer({
+  storage: storage,
+  fileFilter: fileFilter,
+  limits: {
+    fileSize: 5 * 1024 * 1024 // 5MB
+  }
+});
+
+/**
+ * @swagger
+ * /api/weather:
+ *   get:
+ *     summary: Hava durumu bilgisini getirir
+ *     parameters:
+ *       - in: query
+ *         name: lat
+ *         schema:
+ *           type: number
+ *         description: Enlem
+ *       - in: query
+ *         name: lon
+ *         schema:
+ *           type: number
+ *         description: Boylam
+ *     responses:
+ *       200:
+ *         description: Başarılı
+ *       500:
+ *         description: Sunucu hatası
+ */
+router.get('/weather', getWeatherData);
+
+/**
+ * @swagger
+ * /api/analyze:
+ *   post:
+ *     summary: Resim analizi ve ürün önerileri
+ *     consumes:
+ *       - multipart/form-data
+ *     parameters:
+ *       - in: formData
+ *         name: image
+ *         type: file
+ *         description: Analiz edilecek resim
+ *     responses:
+ *       200:
+ *         description: Başarılı
+ *       400:
+ *         description: Geçersiz istek
+ *       500:
+ *         description: Sunucu hatası
+ */
+router.post('/analyze', upload.single('image'), analyzeAndRecommend);
+
+/**
+ * @swagger
+ * /api/products:
+ *   get:
+ *     summary: Etiketlere göre ürün önerileri getirir
+ *     parameters:
+ *       - in: query
+ *         name: tags
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Virgülle ayrılmış ürün etiketleri
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *           maximum: 50
+ *           default: 10
+ *         description: Sayfa başına ürün sayısı
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *           minimum: 1
+ *           default: 1
+ *         description: Sayfa numarası
+ *     responses:
+ *       200:
+ *         description: Başarılı
+ *       400:
+ *         description: Geçersiz istek
+ *       404:
+ *         description: Ürün bulunamadı
+ */
+router.get('/products', getProductsByTag);
+
+// 404 handler
+router.use((req, res) => {
+  res.status(404).json({ message: 'API endpoint bulunamadı' });
+});
 
 module.exports = router;

@@ -11,7 +11,7 @@ const WeatherInfo = ({ weatherData, setWeatherData }) => {
     const fetchWeather = async () => {
       try {
         const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/weather`);
-        setWeatherData(response.data);
+        setWeatherData(response.data.data);
       } catch (error) {
         console.error('Hava durumu bilgisi alınamadı:', error);
         toast.error('Hava durumu bilgisi alınamadı. Lütfen daha sonra tekrar deneyin.');
@@ -35,45 +35,35 @@ const WeatherInfo = ({ weatherData, setWeatherData }) => {
     return null;
   }
 
-  const getWeatherIcon = (weatherCode) => {
+  const getWeatherIcon = (description) => {
     const icons = {
-      '01d': '☀️',
-      '01n': '🌙',
-      '02d': '⛅',
-      '02n': '☁️',
-      '03d': '☁️',
-      '03n': '☁️',
-      '04d': '☁️',
-      '04n': '☁️',
-      '09d': '🌧️',
-      '09n': '🌧️',
-      '10d': '🌦️',
-      '10n': '🌧️',
-      '11d': '⛈️',
-      '11n': '⛈️',
-      '13d': '❄️',
-      '13n': '❄️',
-      '50d': '🌫️',
-      '50n': '🌫️'
+      'açık': '☀️',
+      'parçalı bulutlu': '⛅',
+      'bulutlu': '☁️',
+      'kapalı': '☁️',
+      'yağmurlu': '🌧️',
+      'sağanak yağışlı': '🌧️',
+      'karlı': '❄️',
+      'sisli': '🌫️'
     };
-    return icons[weatherCode] || '🌡️';
+    return icons[description.toLowerCase()] || '🌡️';
   };
 
   return (
     <div className="weather-container">
       <div className="weather-icon">
-        {getWeatherIcon(weatherData.weather[0].icon)}
+        {getWeatherIcon(weatherData.description)}
       </div>
       <div className="weather-info">
         <div className="temperature">
-          {Math.round(weatherData.main.temp)}°C
+          {weatherData.temperature}°C
         </div>
         <div className="description">
-          {weatherData.weather[0].description}
+          {weatherData.description}
         </div>
         <div className="details">
-          Nem: {weatherData.main.humidity}% | 
-          Rüzgar: {Math.round(weatherData.wind.speed)} km/s
+          Nem: {weatherData.humidity}% | 
+          Rüzgar: {Math.round(weatherData.windSpeed)} km/s
         </div>
       </div>
     </div>
@@ -82,19 +72,11 @@ const WeatherInfo = ({ weatherData, setWeatherData }) => {
 
 WeatherInfo.propTypes = {
   weatherData: PropTypes.shape({
-    weather: PropTypes.arrayOf(
-      PropTypes.shape({
-        icon: PropTypes.string.isRequired,
-        description: PropTypes.string.isRequired,
-      })
-    ).isRequired,
-    main: PropTypes.shape({
-      temp: PropTypes.number.isRequired,
-      humidity: PropTypes.number.isRequired,
-    }).isRequired,
-    wind: PropTypes.shape({
-      speed: PropTypes.number.isRequired,
-    }).isRequired,
+    temperature: PropTypes.number,
+    humidity: PropTypes.number,
+    windSpeed: PropTypes.number,
+    description: PropTypes.string,
+    location: PropTypes.string,
   }),
   setWeatherData: PropTypes.func.isRequired,
 };

@@ -7,8 +7,10 @@ COPY package*.json ./
 RUN npm install --production
 
 # Kaynak kodu kopyala
-COPY ./src ./src
+COPY . .
 
-EXPOSE 5000
+ENV NODE_ENV=production
 
-CMD ["node", "src/index.js"]
+EXPOSE 3001
+
+CMD ["npm", "start"]

@@ -1,51 +1,43 @@
 {
   "name": "moda-selfie-backend",
   "version": "1.0.0",
-  "description": "Moda Selfie - İnteraktif ayna uygulaması için Backend API",
+  "description": "Moda Selfie Aynası Backend API",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "test": "jest --coverage",
-    "seed": "node src/utils/seedData.js",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
-  },
-  "jest": {
-    "testEnvironment": "node",
-    "moduleDirectories": [
-      "node_modules",
-      "src"
-    ],
-    "rootDir": ".",
-    "testMatch": [
-      "<rootDir>/test/**/*.test.js"
-    ],
-    "moduleNameMapper": {
-      "^@/(.*)$": "<rootDir>/src/$1"
-    }
+    "format": "prettier --write ."
   },
   "keywords": [
     "moda",
     "selfie",
-    "api",
-    "express",
-    "mongoose"
+    "ayna",
+    "backend"
   ],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "axios": "^1.6.7",
     "cors": "^2.8.5",
-    "dotenv": "^16.0.3",
+    "dotenv": "^16.4.1",
     "express": "^4.18.2",
-    "mongoose": "^7.0.3",
-    "winston": "^3.17.0"
+    "express-validator": "^7.0.1",
+    "helmet": "^7.1.0",
+    "mongoose": "^8.1.1",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "sharp": "^0.33.2",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0",
+    "winston": "^3.11.0"
   },
   "devDependencies": {
-    "eslint": "^8.38.0",
-    "jest": "^29.5.0",
-    "nodemon": "^3.1.9",
-    "supertest": "^6.3.3"
+    "eslint": "^8.56.0",
+    "nodemon": "^3.0.3",
+    "prettier": "^3.2.5"
+  },
+  "directories": {
+    "test": "test"
   }
 }
