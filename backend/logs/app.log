@@ -1,6 +1,0 @@
-2025-02-09 01:47:13.673 | ERROR    | main:health_check:49 - Health check failed: Authentication required.
-2025-02-09 01:47:43.730 | ERROR    | main:health_check:49 - Health check failed: Authentication required.
-2025-02-09 01:47:59.511 | ERROR    | main:health_check:49 - Health check failed: Authentication required.
-2025-02-09 01:48:29.561 | ERROR    | main:health_check:49 - Health check failed: Authentication required.
-2025-02-09 01:48:48.337 | ERROR    | main:health_check:49 - Health check failed: Authentication required.
-2025-02-09 01:49:17.507 | ERROR    | main:health_check:49 - Health check failed: Authentication required.
