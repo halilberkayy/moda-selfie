@@ -1,9 +1,22 @@
-MIT Lisansı
+MIT License
 
-Telif Hakkı (c) 2025 Halil Berkay Şahin
+Copyright (c) 2025 Halil Berkay
 
-Bu yazılım ve ilgili belgelendirme dosyaları ("Yazılım") özel haklar içermektedir ve izinsiz kullanılamaz. Tüm hakları saklıdır.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-Yazılımın kopyalanması, değiştirilmesi, dağıtılması veya herhangi bir şekilde kullanılması için Halil Berkay Şahin'den açık yazılı izin alınması gerekmektedir.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-BU YAZILIM, HERHANGİ BİR GARANTİ VERİLMEKSİZİN "OLDUĞU GİBİ" SUNULMUŞTUR. HİÇBİR KOŞULDA YAZAR VEYA TELİF HAKKI SAHİBİ, YAZILIMIN KULLANIMINDAN VEYA BAŞKA BAĞLANTILARINDAN DOĞAN HERHANGİ BİR İDDİA, HASAR VEYA DİĞER YÜKÜMLÜLÜKLERDEN SORUMLU DEĞİLDİR.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
