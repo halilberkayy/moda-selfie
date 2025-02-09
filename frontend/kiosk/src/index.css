@@ -1,0 +1,120 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary-gradient: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+  --secondary-gradient: linear-gradient(135deg, #3730a3 0%, #4f46e5 100%);
+  --background-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  --glass-background: rgba(255, 255, 255, 0.95);
+  --glass-border: rgba(255, 255, 255, 0.3);
+  --shadow-color: rgba(79, 70, 229, 0.1);
+  --text-primary: #1e293b;
+  --text-secondary: #475569;
+}
+
+@layer base {
+  body {
+    @apply m-0 antialiased text-gray-900 min-h-screen;
+    background: var(--background-gradient);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight;
+  }
+}
+
+@layer components {
+  .glass-effect {
+    @apply backdrop-blur-xl border rounded-3xl p-6;
+    background: var(--glass-background);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px 0 var(--shadow-color);
+  }
+
+  .gradient-text {
+    @apply font-extrabold text-transparent bg-clip-text;
+    background-image: var(--primary-gradient);
+  }
+
+  /* Buton Temel Stili */
+  .button-base {
+    @apply rounded-2xl font-semibold transition-all duration-300 ease-in-out 
+           flex items-center justify-center gap-2 text-center relative overflow-hidden;
+  }
+
+  .button-primary {
+    @apply button-base text-white py-4 px-8;
+    background-image: var(--primary-gradient);
+  }
+
+  .button-primary:hover {
+    @apply -translate-y-1;
+    background-image: var(--secondary-gradient);
+  }
+
+  .button-secondary {
+    @apply button-base bg-white text-indigo-600 border-2 border-indigo-600/20 py-3.5 px-7;
+  }
+
+  .button-secondary:hover {
+    @apply -translate-y-1;
+    background-image: var(--primary-gradient);
+    color: white;
+    border-color: transparent;
+  }
+
+  /* Webcam ve Sonuç Görseli Konteyneri */
+  .webcam-container {
+    @apply relative rounded-3xl overflow-hidden;
+    box-shadow: 0 20px 40px -12px var(--shadow-color);
+    aspect-ratio: 16/9;
+    background: #f0f0f0;
+  }
+
+  .result-image {
+    @apply rounded-3xl transition-all duration-500;
+  }
+
+  .result-image:hover {
+    @apply scale-105 -translate-y-1;
+    box-shadow: 0 25px 50px -12px var(--shadow-color);
+  }
+
+  /* İlerleme Adımları */
+  .progress-steps {
+    @apply flex items-center justify-center gap-2;
+  }
+
+  .step-indicator {
+    @apply w-12 h-12 rounded-full flex items-center justify-center text-lg font-semibold;
+    background: var(--glass-background);
+    box-shadow: 0 4px 8px var(--shadow-color);
+    color: var(--text-secondary);
+  }
+
+  .step-indicator.active {
+    @apply text-white;
+    background-image: var(--primary-gradient);
+  }
+
+  .step-line {
+    @apply h-1 w-16 rounded-full bg-gray-200;
+  }
+
+  .step-line.active {
+    background-image: var(--primary-gradient);
+  }
+
+  /* Sayfa Başlık ve Alt Başlık */
+  .page-title {
+    @apply text-4xl font-bold mb-6 gradient-text text-center;
+  }
+
+  .page-subtitle {
+    @apply text-lg text-gray-600 mb-8 text-center;
+  }
+}
