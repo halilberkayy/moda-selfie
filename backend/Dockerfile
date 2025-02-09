@@ -1,16 +1,27 @@
-FROM node:18-alpine
+FROM python:3.11-slim
+
+# Çıktıların anında görünmesi için
+ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
-# Package dosyalarını kopyala ve bağımlılıkları yükle
-COPY package*.json ./
-RUN npm install --production
+# Sistem paketlerini yükle
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libpq-dev \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
 
-# Kaynak kodu kopyala
+# Gereksinim dosyasını kopyala ve paketleri yükle
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Uygulama dosyalarını kopyala
 COPY . .
 
-ENV NODE_ENV=production
+# Sağlık kontrolü için
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:8000/health || exit 1
 
-EXPOSE 3001
-
-CMD ["npm", "start"]
+# Geliştirme sırasında --reload; production için kaldırılabilir.
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]

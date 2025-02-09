@@ -1,135 +1,146 @@
-# Moda Selfie Ayna 🪞
+# Akıllı Ayna Kiosk Sistemi
 
-Moda Selfie, AVM'lerde ve popüler noktalarda yer alacak interaktif aynalardan, kullanıcının çektiği fotoğrafı analiz ederek hava durumuna ve belirlenen koşullara uygun Trendyol Milla ürünlerini QR kod ile öneren akıllı bir sistemdir.
+Akıllı Ayna Kiosk Sistemi, kullanıcıların kıyafetleri sanal olarak denemelerine olanak sağlayan modern bir e-ticaret çözümüdür. Sistem, yapay zeka destekli virtual try-on teknolojisi ile kullanıcıların kıyafetleri üzerlerinde nasıl duracağını görmelerini sağlar ve beğendikleri ürünlere QR kod ile hızlıca erişmelerini mümkün kılar.
 
-## 🌟 Özellikler
+## Özellikler
 
-- 🌤️ **Canlı Hava Durumu:** OpenWeatherMap API entegrasyonu ile gerçek zamanlı hava durumu bilgisi
-- 📸 **Akıllı Fotoğraf Çekimi:** Kullanıcı dostu kamera arayüzü
-- 🤖 **Fotoğraf Analizi:** Yapay zeka destekli fotoğraf analizi
-- 👗 **Akıllı Ürün Önerileri:** Hava durumu ve kullanıcı stiline göre kişiselleştirilmiş öneriler
-- 📱 **QR Kod Entegrasyonu:** Kolay ürün erişimi için QR kod sistemi
+- 👕 Virtual Try-On: Kıyafetleri gerçek zamanlı olarak deneme
+- 📱 QR Kod Entegrasyonu: Beğenilen ürünlere hızlı erişim
+- 🛍️ Ürün Yönetimi: Kapsamlı ürün kataloğu yönetimi
+- 📸 Kamera Entegrasyonu: Gerçek zamanlı görüntü işleme
+- 🔍 Ürün Önerileri: Yapay zeka destekli ürün önerileri
+- 📊 Stok Takibi: Gerçek zamanlı stok yönetimi
+- 🌐 Modern Web Arayüzü: Kullanıcı dostu tasarım
 
-## 🛠️ Teknoloji Yığını
+## Teknoloji Yığını
 
 ### Backend
-- Node.js & Express
-- MongoDB & Mongoose
-- Jest & Supertest
-- OpenWeatherMap API
+- FastAPI
+- PostgreSQL
+- Redis
+- TensorFlow
+- SQLAlchemy
+- Alembic
+- Python 3.11
 
 ### Frontend
-- React 18
+- React
+- TypeScript
+- Tailwind CSS
 - Axios
-- React Webcam
-- Modern CSS3
 
 ### DevOps
-- Docker & Docker Compose
-- GitHub Actions CI/CD
-- ESLint & Prettier
-- Jest Test Framework
+- Docker
+- Docker Compose
+- Health Checks
+- Resource Management
 
-## 🚀 Kurulum
+## Başlangıç
 
 ### Gereksinimler
-- Node.js (v18+)
-- MongoDB (v6.0+)
-- Docker & Docker Compose (opsiyonel)
-- OpenWeatherMap API Anahtarı
+- Docker
+- Docker Compose
+- Git
 
-### 1. Projeyi Klonlama
-```sh
-git clone https://github.com/halilberkayy/moda-selfie.git
-cd moda-selfie
+### Kurulum
+
+1. Projeyi klonlayın:
+```bash
+git clone [repo-url]
+cd smart-mirror
 ```
 
-### 2. Backend Kurulumu
-```sh
+2. Ortam değişkenlerini ayarlayın:
+```bash
+cp backend/.env.example backend/.env
+# .env dosyasını düzenleyin
+```
+
+3. Sistemi başlatın:
+```bash
+docker-compose up -d
+```
+
+4. Veritabanı migrasyonlarını çalıştırın:
+```bash
+docker-compose exec backend alembic upgrade head
+```
+
+Sistem http://localhost:3000 adresinde çalışmaya başlayacaktır.
+
+## API Endpoint'leri
+
+### Ürün Yönetimi
+- `POST /products/`: Yeni ürün ekle
+- `GET /products/`: Ürünleri listele
+- `GET /products/{id}`: Ürün detaylarını getir
+- `PUT /products/{id}`: Ürün bilgilerini güncelle
+- `DELETE /products/{id}`: Ürünü sil (soft delete)
+- `GET /products/categories/`: Kategorileri listele
+- `GET /products/brands/`: Markaları listele
+- `GET /products/{id}/qr`: Ürün QR kodunu getir
+
+### Virtual Try-On
+- `POST /virtual-try-on/`: Kıyafet deneme simülasyonu
+
+### Sistem
+- `GET /health`: Sistem sağlık kontrolü
+
+## Geliştirme
+
+### Backend Geliştirme
+```bash
 cd backend
-cp .env.example .env   # .env dosyasını düzenleyin
-npm install
-npm run seed   # Örnek verileri yükle
-npm run dev
+python -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+uvicorn main:app --reload
 ```
 
-### 3. Frontend Kurulumu
-```sh
-cd frontend
-cp .env.example .env   # .env dosyasını düzenleyin
+### Frontend Geliştirme
+```bash
+cd frontend/kiosk
 npm install
 npm start
 ```
 
-### 4. Docker ile Çalıştırma
-```sh
-docker-compose -f backend/docker-compose.yml -f frontend/docker-compose.yml up --build
-```
-
-## 🧪 Test
+## Test
 
 ### Backend Testleri
-```sh
+```bash
 cd backend
-npm test
+pytest
 ```
 
 ### Frontend Testleri
-```sh
-cd frontend
+```bash
+cd frontend/kiosk
 npm test
 ```
 
-## 🔍 Lint Kontrolleri
+## Dağıtım
 
-### Backend
-```sh
-cd backend
-npm run lint
-```
+Production ortamı için:
+1. `.env` dosyasında production ayarlarını yapın
+2. `docker-compose.prod.yml` dosyasını kullanın
+3. SSL sertifikalarını ekleyin
+4. Güvenlik ayarlarını yapılandırın
 
-### Frontend
-```sh
-cd frontend
-npm run lint
-```
+## Güvenlik
 
-## 📦 Deployment
+- API anahtarları güvenli bir şekilde yönetilmelidir
+- Production ortamında CORS ayarları kısıtlanmalıdır
+- Rate limiting uygulanmalıdır
+- SSL/TLS kullanılmalıdır
 
-Proje GitHub Actions ile otomatik olarak deploy edilmektedir:
-1. **Main** branch'e push yapıldığında testler çalışır.
-2. Testler başarılı ise Docker imajları oluşturulur.
-3. İmajlar Docker Hub'a gönderilir.
-4. Üretim sunucusunda otomatik güncelleme yapılır.
-
-## 🔧 Yönetim Araçları
-
-- **MongoDB Yönetimi:** [http://localhost:8081](http://localhost:8081)
-- **API Dokümantasyonu:** [http://localhost:5000/api/docs](http://localhost:5000/api/docs)
-- **Docker Konteyner Yönetimi:** `docker-compose ps`
-
-## 🤝 Katkıda Bulunma
+## Katkıda Bulunma
 
 1. Fork yapın
 2. Feature branch oluşturun (`git checkout -b feature/amazing-feature`)
-3. Değişikliklerinizi commit edin (`git commit -m 'feat: Add amazing feature'`)
+3. Değişikliklerinizi commit edin (`git commit -m 'Add amazing feature'`)
 4. Branch'inizi push edin (`git push origin feature/amazing-feature`)
-5. Pull Request oluşturun
+5. Pull Request açın
 
-## 📝 Notlar
+## Lisans
 
-- Fotoğraf analizi şu an **simülasyon modunda** çalışmaktadır.
-- Gerçek ML modeli entegrasyonu için `src/utils/aiAnalyzer.js` güncellenmelidir.
-- Ürün verileri MongoDB'ye **seed script** ile yüklenmektedir.
-
-## 📄 Lisans
-
-Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için [LICENSE](LICENSE) dosyasına bakınız.
-
-## 🙏 Teşekkürler
-
-- OpenWeatherMap API
-- MongoDB
-- React Topluluğu
-- Docker Topluluğu
-
+Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için [LICENSE](LICENSE) dosyasına bakın.

@@ -1,0 +1,204 @@
+2025-02-09 00:20:47 | INFO | Redis bağlantısı başarılı.
+2025-02-09 00:20:47 | WARNING | Mevcut model yüklenemedi: Error when deserializing class 'InputLayer' using config={'batch_shape': [None, 224, 224, 3], 'dtype': 'float32', 'sparse': False, 'name': 'input_layer'}.
+
+Exception encountered: Unrecognized keyword arguments: ['batch_shape']
+2025-02-09 00:20:47 | INFO | Yeni model oluşturuluyor...
+2025-02-09 00:20:57 | INFO | Yeni DeepFashion modeli oluşturuldu ve kaydedildi
+2025-02-09 00:21:04 | INFO | Request başladı: GET http://localhost:8000/
+2025-02-09 00:21:04 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 00:21:44 | INFO | Request başladı: POST http://localhost:8000/urun-oner
+2025-02-09 00:21:45 | INFO | Request tamamlandı: 0.35 saniye
+2025-02-09 00:23:22 | INFO | Request başladı: GET http://localhost:8000/urun-oner
+2025-02-09 00:23:22 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 00:38:00 | INFO | Request başladı: GET http://localhost:8000/
+2025-02-09 00:38:00 | INFO | Request tamamlandı: 0.01 saniye
+2025-02-09 00:46:57 | ERROR | Redis bağlantısı başarısız: Authentication required.
+2025-02-09 00:49:30 | ERROR | Redis bağlantısı başarısız: Authentication required.
+2025-02-09 00:52:49 | ERROR | Redis bağlantısı başarısız: Authentication required.
+2025-02-09 01:29:15 | ERROR | Redis bağlantısı başarısız: Authentication required.
+2025-02-09 01:32:29 | ERROR | Redis bağlantısı başarısız: Authentication required.
+2025-02-09 01:33:32 | ERROR | Redis bağlantısı başarısız: Authentication required.
+2025-02-09 01:36:06 | WARNING | Redis bağlantı denemesi 1 başarısız: Authentication required.
+2025-02-09 01:36:08 | WARNING | Redis bağlantı denemesi 2 başarısız: Authentication required.
+2025-02-09 01:36:10 | WARNING | Redis bağlantı denemesi 3 başarısız: Authentication required.
+2025-02-09 01:36:12 | WARNING | Redis bağlantı denemesi 4 başarısız: Authentication required.
+2025-02-09 01:36:14 | ERROR | Redis bağlantısı başarısız: Authentication required.
+2025-02-09 01:36:16 | INFO | Mevcut DeepFashion modeli başarıyla yüklendi
+2025-02-09 01:38:43 | WARNING | Redis bağlantı denemesi 1 başarısız: Authentication required.
+2025-02-09 01:38:45 | WARNING | Redis bağlantı denemesi 2 başarısız: Authentication required.
+2025-02-09 01:38:47 | WARNING | Redis bağlantı denemesi 3 başarısız: Authentication required.
+2025-02-09 01:38:49 | WARNING | Redis bağlantı denemesi 4 başarısız: Authentication required.
+2025-02-09 01:38:51 | ERROR | Redis bağlantısı başarısız: Authentication required.
+2025-02-09 01:38:52 | INFO | Mevcut DeepFashion modeli başarıyla yüklendi
+2025-02-09 01:39:28 | INFO | Redis bağlantısı başarılı
+2025-02-09 01:39:29 | INFO | Mevcut DeepFashion modeli başarıyla yüklendi
+2025-02-09 01:39:56 | INFO | Redis bağlantısı başarılı
+2025-02-09 01:39:57 | INFO | Mevcut DeepFashion modeli başarıyla yüklendi
+2025-02-09 01:40:34 | INFO | Redis bağlantısı başarılı
+2025-02-09 01:40:35 | INFO | Mevcut DeepFashion modeli başarıyla yüklendi
+2025-02-09 01:40:51 | INFO | Redis bağlantısı başarılı
+2025-02-09 01:40:52 | INFO | Mevcut DeepFashion modeli başarıyla yüklendi
+2025-02-09 01:41:21 | INFO | Redis bağlantısı başarılı
+2025-02-09 01:41:22 | INFO | Mevcut DeepFashion modeli başarıyla yüklendi
+2025-02-09 01:41:57 | INFO | Redis bağlantısı başarılı
+2025-02-09 01:41:58 | INFO | Mevcut DeepFashion modeli başarıyla yüklendi
+2025-02-09 01:42:37 | INFO | Redis bağlantısı başarılı
+2025-02-09 01:42:38 | INFO | Mevcut DeepFashion modeli başarıyla yüklendi
+2025-02-09 01:43:04 | INFO | Redis bağlantısı başarılı
+2025-02-09 01:43:05 | INFO | Mevcut DeepFashion modeli başarıyla yüklendi
+2025-02-09 01:43:07 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:43:07 | ERROR | Health check failed: object bool can't be used in 'await' expression
+2025-02-09 01:43:07 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:43:12 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:43:12 | ERROR | Health check failed: object bool can't be used in 'await' expression
+2025-02-09 01:43:12 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:43:13 | INFO | Request başladı: GET http://localhost:8000/
+2025-02-09 01:43:13 | INFO | Request tamamlandı: 0.01 saniye
+2025-02-09 01:43:17 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:43:17 | ERROR | Health check failed: object bool can't be used in 'await' expression
+2025-02-09 01:43:17 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:43:22 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:43:22 | ERROR | Health check failed: object bool can't be used in 'await' expression
+2025-02-09 01:43:22 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:43:27 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:43:27 | ERROR | Health check failed: object bool can't be used in 'await' expression
+2025-02-09 01:43:27 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:43:33 | INFO | Redis bağlantısı başarılı
+2025-02-09 01:43:34 | INFO | Mevcut DeepFashion modeli başarıyla yüklendi
+2025-02-09 01:43:36 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:43:36 | ERROR | Health check failed: object bool can't be used in 'await' expression
+2025-02-09 01:43:36 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:43:41 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:43:41 | ERROR | Health check failed: object bool can't be used in 'await' expression
+2025-02-09 01:43:41 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:43:46 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:43:46 | ERROR | Health check failed: object bool can't be used in 'await' expression
+2025-02-09 01:43:46 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:43:51 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:43:51 | ERROR | Health check failed: object bool can't be used in 'await' expression
+2025-02-09 01:43:51 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:43:54 | INFO | Redis bağlantısı başarılı
+2025-02-09 01:43:54 | INFO | Mevcut DeepFashion modeli başarıyla yüklendi
+2025-02-09 01:43:57 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:43:57 | ERROR | Health check failed: object bool can't be used in 'await' expression
+2025-02-09 01:43:57 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:44:02 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:44:02 | ERROR | Health check failed: object bool can't be used in 'await' expression
+2025-02-09 01:44:02 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:44:07 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:44:07 | ERROR | Health check failed: object bool can't be used in 'await' expression
+2025-02-09 01:44:07 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:44:12 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:44:12 | ERROR | Health check failed: object bool can't be used in 'await' expression
+2025-02-09 01:44:12 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:44:17 | INFO | Redis bağlantısı başarılı
+2025-02-09 01:44:18 | INFO | Mevcut DeepFashion modeli başarıyla yüklendi
+2025-02-09 01:44:20 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:44:20 | ERROR | Health check failed: object bool can't be used in 'await' expression
+2025-02-09 01:44:20 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:44:25 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:44:25 | ERROR | Health check failed: object bool can't be used in 'await' expression
+2025-02-09 01:44:25 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:44:30 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:44:30 | ERROR | Health check failed: object bool can't be used in 'await' expression
+2025-02-09 01:44:30 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:44:35 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:44:35 | ERROR | Health check failed: object bool can't be used in 'await' expression
+2025-02-09 01:44:35 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:44:40 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:44:40 | ERROR | Health check failed: object bool can't be used in 'await' expression
+2025-02-09 01:44:40 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:45:04 | INFO | Redis bağlantısı başarılı
+2025-02-09 01:45:05 | INFO | Mevcut DeepFashion modeli başarıyla yüklendi
+2025-02-09 01:45:07 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:45:07 | ERROR | Health check failed: object bool can't be used in 'await' expression
+2025-02-09 01:45:07 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:45:12 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:45:12 | ERROR | Health check failed: object bool can't be used in 'await' expression
+2025-02-09 01:45:12 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:45:18 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:45:18 | ERROR | Health check failed: object bool can't be used in 'await' expression
+2025-02-09 01:45:18 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:45:23 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:45:23 | ERROR | Health check failed: object bool can't be used in 'await' expression
+2025-02-09 01:45:23 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:45:28 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:45:28 | ERROR | Health check failed: object bool can't be used in 'await' expression
+2025-02-09 01:45:28 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:45:32 | INFO | Redis bağlantısı başarılı
+2025-02-09 01:45:33 | INFO | Mevcut DeepFashion modeli başarıyla yüklendi
+2025-02-09 01:45:35 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:45:35 | ERROR | Health check failed: object bool can't be used in 'await' expression
+2025-02-09 01:45:35 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:45:40 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:45:40 | ERROR | Health check failed: object bool can't be used in 'await' expression
+2025-02-09 01:45:40 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:45:45 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:45:45 | ERROR | Health check failed: object bool can't be used in 'await' expression
+2025-02-09 01:45:45 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:45:50 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:45:50 | ERROR | Health check failed: object bool can't be used in 'await' expression
+2025-02-09 01:45:50 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:45:55 | INFO | Redis bağlantısı başarılı
+2025-02-09 01:45:56 | INFO | Mevcut DeepFashion modeli başarıyla yüklendi
+2025-02-09 01:45:59 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:45:59 | ERROR | Health check failed: object bool can't be used in 'await' expression
+2025-02-09 01:45:59 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:46:04 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:46:04 | ERROR | Health check failed: object bool can't be used in 'await' expression
+2025-02-09 01:46:04 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:46:09 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:46:09 | ERROR | Health check failed: object bool can't be used in 'await' expression
+2025-02-09 01:46:09 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:46:14 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:46:14 | ERROR | Health check failed: object bool can't be used in 'await' expression
+2025-02-09 01:46:14 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:46:19 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:46:19 | ERROR | Health check failed: object bool can't be used in 'await' expression
+2025-02-09 01:46:19 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:46:24 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:46:24 | ERROR | Health check failed: object bool can't be used in 'await' expression
+2025-02-09 01:46:24 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:46:29 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:46:29 | ERROR | Health check failed: object bool can't be used in 'await' expression
+2025-02-09 01:46:29 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:46:34 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:46:34 | ERROR | Health check failed: object bool can't be used in 'await' expression
+2025-02-09 01:46:34 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:46:43 | INFO | Redis bağlantısı başarılı
+2025-02-09 01:46:44 | INFO | Mevcut DeepFashion modeli başarıyla yüklendi
+2025-02-09 01:46:46 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:46:46 | ERROR | Health check failed: object bool can't be used in 'await' expression
+2025-02-09 01:46:46 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:49:57 | INFO | Redis bağlantısı başarılı
+2025-02-09 01:49:59 | INFO | Mevcut DeepFashion modeli başarıyla yüklendi
+2025-02-09 01:50:03 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:50:03 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:50:33 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:50:33 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:51:03 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:51:03 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:51:33 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:51:33 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:52:03 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:52:03 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:52:34 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:52:34 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:53:04 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:53:04 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:53:34 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:53:34 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:53:55 | INFO | Request başladı: GET http://localhost:8000/
+2025-02-09 01:53:55 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:53:57 | INFO | Request başladı: GET http://localhost:8000/
+2025-02-09 01:53:57 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:54:04 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:54:04 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:54:08 | INFO | Request başladı: POST http://localhost:8000/virtual-tryon
+2025-02-09 01:54:08 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:54:40 | INFO | Redis bağlantısı başarılı
+2025-02-09 01:54:41 | INFO | Mevcut DeepFashion modeli başarıyla yüklendi
+2025-02-09 01:54:43 | INFO | Request başladı: GET http://localhost:8000/
+2025-02-09 01:54:43 | INFO | Request tamamlandı: 0.00 saniye
+2025-02-09 01:54:43 | INFO | Request başladı: GET http://localhost:8000/health
+2025-02-09 01:54:43 | INFO | Request tamamlandı: 0.00 saniye
